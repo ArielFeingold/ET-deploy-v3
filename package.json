@@ -2,8 +2,5 @@
   "name": "et-deploy-v3",
   "private": true,
   "dependencies": {},
-  "devDependencies": {
-    "webpack": "4.16.2",
-    "webpack-cli": "^3.1.0"
-  }
+  "devDependencies": {}
 }
