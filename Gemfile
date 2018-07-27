@@ -34,7 +34,8 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'titleize'
-gem 'webpacker', '~> 3.5'
+gem 'nokogiri'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
