@@ -1,0 +1,59 @@
+
+<div class="row">
+  <div class="col-sm-6 mx-auto pt-5">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title pb-3">Event: <%=@event.title%></h5>
+          <p>Created By: <%=link_to @event.user.name, user_path(@event.user)%></p>
+          <p>Description: <%=@event.description%></p>
+          <p>Date: <%=@event.date.strftime("%A, %B %-d, %Y" )%></p>
+          <p>Time: <%=@event.time.strftime("%-l:%M%P")%></p>
+          <p>Location:</p>
+          <p>
+            <%=link_to @event.location.name, event_location_path(@event, @event.location)%><br>
+            <%=@event.location.address%><br>
+            <%=@event.location.city%>, <%=@event.location.state%>
+            </p>
+          <%if @event.user == current_user%>
+            <%= link_to "Edit Event", edit_user_event_path(current_user, @event), class:"btn btn-primary" %>
+          <%end%>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title pb-3">Going: </h5>
+          <ul class="list-group">
+            <%@event.rsvps.each do |rsvp| %>
+              <li class="list-group-item"><%=link_to rsvp.user.name, user_path(rsvp.user)%></li>
+            <%end%>
+          </ul>
+          <%if @event.rsvps.detect {|r| r.user_id == current_user.id} == nil%>
+            <%= button_to "Attend Event", rsvps_path, :method => :post, params: { "event_id" => @event.id }, class: "btn btn-primary mt-2" %>
+          <%else%>
+            <p>you are attending this event</p>
+            <%= button_to "Unattend Event", rsvp_path, :method => :delete, class: "btn btn-outline-warning mt-2" %>
+          <%end%>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 mx-auto pt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title pb-3">Comments </h5>
+          <%if @event.comments.empty?%>
+            <p>There are no comments for this event</p>
+          <%else%>
+            <ul class="list-group" id="comment-list">
+              <%@event.comments.each do |c| %>
+                <li class="list-group-item"> <%=link_to c.user.name.titleize, user_path(c.user)%>: <%=c.content.capitalize%> <%=link_to "edit", edit_comment_path(c) if c.user == current_user%></li>
+              <%end%>
+            </ul>
+          <%end%>
+          <%if @event.rsvps.detect {|r| r.user == current_user}%>
+            <p class="mt-4">Leave a Comment:</p>
+            <%= render 'comments/comment_form' %>
+          <%end%>
+      </div>
+    </div>
+  </div>
+</div>

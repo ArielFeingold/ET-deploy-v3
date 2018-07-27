@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-sm-6 mx-auto pt-5">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title pb-3"><%=@location.name%></h5>
+        <p>
+          <%=@location.name%><br>
+          <%=@location.address%><br>
+          <%=@location.city%>, <%=@location.state%>
+        </p>
+        <%if @location.user == current_user%>
+          <%= link_to '<button type="button" class="btn btn-primary mt-2">Edit Location</button>'.html_safe, edit_user_location_path(@location.user, @location) %>
+        <%end%>
+      </div>
+    </div>
+    <div id="event_details_div">
+      <!--  for event details -->
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title pb-3">Upcoming Events: </h5>
+        <p>Click on event for more details</p>
+          <span class="clickable"><ul class="list-group pb-3 list-holder" id="upcoimng_events" data-id="<%=@location.id%>" data-user="<%=@location.user_id%>"></ul></span>
+         <%if @location.public == true%>
+           <%= link_to '<button type="button" class="btn btn-primary mt-2">Create New Event</button>'.html_safe, new_user_event_path(current_user) %>
+         <%end%>
+      </div>
+    </div>
+  </div>
+</div>

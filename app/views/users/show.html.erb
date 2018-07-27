@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-6 mx-auto pt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title pb-3"><%=@user.name.titleize%></h5>
+        <p class=""><b> A Bit About Me:</b><br>
+          <%=@user.about.capitalize%></p>
+        <p><b>Home Town:</b> <%=@user.city%>, <%=@user.state%></p>
+        <%if @user == current_user%>
+          <%= link_to '<button type="button" class="btn btn-primary mt-2">Edit Profile</button>'.html_safe, edit_user_path(@user) %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+<!--  upcoming events-->
+  <div class="col-sm-6 mx-auto pt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title pb-3"><%=@user.name.titleize%> Upcoming Events</h5>
+          <ul class="list-group pb-3 pl-3" id="user_events" data-id="<%=@user.id%>"></ul>
+        <%if @user == current_user%>
+          <%= link_to '<button type="button" class="btn btn-primary mt-2">Create New Event</button>'.html_safe, new_user_event_path(current_user) %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  attending events-->
+<div class="row">
+<%if @user == current_user %>
+  <div class="col-sm-6 mx-auto pt-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title pb-3">RSVP'd Events</h5>
+          <ul class="list-group pb-3 pl-3" id="attending_events" data-id="<%=@user.id%>"></ul>
+      </div>
+    </div>
+  </div>
+  <!--  nearby events-->
+    <div class="col-sm-6 mx-auto pt-2">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title pb-3">Events Near You</h5>
+            <ul class="list-group pb-3 pl-3" id="nearby_events" data-id="<%=@user.id%>"></ul>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
