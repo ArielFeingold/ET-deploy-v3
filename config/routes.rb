@@ -21,5 +21,5 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  get '/privacy' => 'ststic_pages#privacy'
+  get '/privacy' => 'static_pages#privacy'
 end
