@@ -20,4 +20,6 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+
+  get '/privacy' => 'ststic_pages#privacy'
 end
